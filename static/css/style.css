@@ -1,44 +1,58 @@
+/* ============================================================
+   CSS RECO - VERSÃO DEFINITIVA (Todas as classes originais + Novo Design)
+   ============================================================ */
+
 :root {
-  /* Paleta: amarelo cerrado, marrom e tons de pôr-do-sol */
-  --bg-page: #FFF7EE;        /* creme claro */
-  --bg-dark: #3B2B20;        /* marrom profundo para header */
-  --bg-darker: #24170F;      /* marrom muito escuro para footer */
-  --text-primary: #2E241B;   /* texto primário (marrom escuro) */
-  --text-muted: #7A6B60;     /* texto secundário */
-  --brand: #D89A2A;          /* amarelo-ocre (cerrado) */
-  --brand-dark: #8A4B1E;     /* marrom/laranja queimado */
-  --burnt: #C86A1A;         /* amarelo queimado */
-  --btn-brown: #7A4828;     /* tom marrom para botões */
-  --btn-orange: #D97F2A;    /* tom laranja para botões */
-  --accent-sky1: #FF7A59;    /* laranja pôr-do-sol */
-  --accent-sky2: #FFB199;    /* pêssego claro */
-  --accent-sky3: #7B59FF;    /* tom de crepúsculo */
-  --card-shadow: 0 20px 45px rgba(27, 18, 12, 0.06);
+  /* --- PALETA MOODBOARD (Cerrado & Ipê) --- */
+  --bg-page: #FFFBF5;        /* Creme Suave */
+  --bg-dark: #2E1F15;        /* Café Escuro */
+  --bg-darker: #1A110B;      /* Café Extra Escuro */
+  
+  --text-primary: #2E1F15;   /* Texto Principal */
+  --text-muted: #8C5E35;     /* Marrom Terra */
+  
+  --brand: #F2B705;          /* Amarelo Ipê */
+  --brand-dark: #D9933D;     /* Ocre Dourado */
+  --burnt: #D96704;          /* Laranja Ferrugem */
+  
+  --btn-brown: #8C5E35;
+  --btn-orange: #D96704;
+  
+  /* Gradientes de apoio */
+  --accent-sky1: #D96704;
+  --accent-sky2: #F2B705;
+  
+  /* --- VISUAL --- */
+  --card-shadow: 0 10px 30px rgba(140, 94, 53, 0.08);
+  --card-shadow-hover: 0 15px 40px rgba(140, 94, 53, 0.15);
+  --radius-card: 16px;       /* Bordas Arredondadas */
+  --radius-btn: 50px;        /* Botões Redondos */
 }
 
-* {
-  box-sizing: border-box;
-}
+/* ================= 1. GERAL ================= */
+* { box-sizing: border-box; }
 
 body {
-  font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family: 'Inter', system-ui, sans-serif;
   margin: 0;
   color: var(--text-primary);
   background: var(--bg-page);
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  line-height: 1.5;
 }
 
-a {
-  color: inherit;
-  text-decoration: none;
-}
+a { color: inherit; text-decoration: none; transition: 0.3s ease; }
 
+/* ================= 2. HEADER E NAVEGAÇÃO ================= */
 .site-header {
-  background: var(--bg-dark);
-  color: #fff;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+  background: #fff;
+  border-bottom: 3px solid var(--brand);
+  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
 }
 
 .nav-container {
@@ -46,341 +60,232 @@ a {
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
-  padding: 0.75rem 0;
+  padding: 0.8rem 1.5rem;
+  max-width: 1100px;
+  margin: 0 auto;
 }
 
 .brand {
   display: inline-flex;
   gap: 0.5rem;
   align-items: center;
-  font-weight: 600;
-  font-size: 1.2rem;
-  color: #fff;
+  font-weight: 800;
+  font-size: 1.4rem;
+  color: var(--burnt);
 }
 
-.nav-actions {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  flex-wrap: wrap;
-}
+.nav-actions { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
+.nav-actions .welcome { color: var(--text-muted); font-weight: 600; font-size: 0.9rem; }
 
-.nav-actions .welcome {
-  color: var(--brand);
-  font-size: 0.9rem;
+/* Dropdown */
+.nav-dropdown { position: relative; }
+.nav-dropdown button { background: none; border: none; font-weight: 600; color: var(--text-primary); cursor: pointer; display: flex; align-items: center; gap: 5px; }
+.nav-dropdown-menu {
+  position: absolute; right: 0; top: 100%; background: #fff;
+  border-radius: 12px; box-shadow: var(--card-shadow-hover); padding: 0.5rem;
+  min-width: 200px; display: none; z-index: 20; border: 1px solid rgba(0,0,0,0.05);
 }
+.nav-dropdown.open .nav-dropdown-menu { display: block; }
+.nav-dropdown-menu a { display: block; padding: 0.6rem 1rem; border-radius: 8px; color: var(--text-primary); }
+.nav-dropdown-menu a:hover { background: #FFF8E6; color: var(--burnt); }
 
-/* Botões: substituir tons azuis por marrom/laranja do cerrado */
+/* ================= 3. BOTÕES ================= */
 .btn-primary {
-  background-color: var(--btn-brown) !important;
-  border-color: var(--btn-brown) !important;
-  color: #fff !important;
+  background: linear-gradient(135deg, var(--burnt), var(--brand-dark)) !important;
+  border: none !important; color: #fff !important;
+  border-radius: var(--radius-btn) !important; padding: 0.6rem 1.5rem !important;
+  font-weight: 600 !important; display: inline-flex; align-items: center; gap: 8px;
+  box-shadow: 0 4px 10px rgba(217, 103, 4, 0.3);
 }
-.btn-primary:hover,
-.btn-primary:focus {
-  background-color: var(--brand-dark) !important;
-  border-color: var(--brand-dark) !important;
-}
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 6px 15px rgba(217, 103, 4, 0.4); }
 
 .btn-outline-primary {
-  color: var(--btn-brown) !important;
-  border-color: var(--btn-brown) !important;
   background: transparent !important;
+  border: 2px solid var(--btn-brown) !important; color: var(--btn-brown) !important;
+  border-radius: var(--radius-btn) !important; padding: 0.5rem 1.2rem !important;
+  font-weight: 600 !important;
 }
-.btn-outline-primary:hover,
-.btn-outline-primary:focus {
-  background: rgba(200,110,40,0.08) !important;
-}
+.btn-outline-primary:hover { background: var(--btn-brown) !important; color: #fff !important; }
 
-/* Botão secundário (Menu) em tom laranja suave */
 .btn-secondary {
-  background-color: var(--btn-orange) !important;
-  border-color: var(--btn-orange) !important;
-  color: #fff !important;
+  background: transparent !important;
+  border: 2px solid var(--btn-orange) !important; color: var(--btn-orange) !important;
+  border-radius: var(--radius-btn) !important; padding: 0.5rem 1.2rem !important; font-weight: 600 !important;
 }
+.btn-secondary:hover { background: var(--btn-orange) !important; color: #fff !important; }
 
-/* Caixa hero/banner: amarelo queimado (cerrado) */
-.hero-banner {
-  background: linear-gradient(120deg, var(--burnt), var(--brand)) !important;
-  color: #fff;
-  border-radius: 1.5rem;
-  padding: 3rem;
-  box-shadow: var(--card-shadow);
-}
-
-.nav-dropdown {
-  position: relative;
-}
-
-.nav-dropdown button {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.25rem;
-}
-
-.nav-dropdown-menu {
-  position: absolute;
-  right: 0;
-  top: calc(100% + 0.35rem);
-  background: #fff;
-  border-radius: 0.75rem;
-  box-shadow: 0 16px 40px rgba(10, 10, 25, 0.2);
-  padding: 0.5rem;
-  min-width: 200px;
-  display: none;
-  z-index: 20;
-}
-
-.nav-dropdown-menu a {
-  display: block;
-  padding: 0.5rem 0.75rem;
-  border-radius: 0.5rem;
-  color: var(--text-primary);
-  font-weight: 500;
-}
-
-.nav-dropdown-menu a:hover,
-.nav-dropdown-menu a:focus-visible {
-  background: rgba(216,138,26,0.08);
-}
-
-.nav-dropdown.open .nav-dropdown-menu {
-  display: block;
-}
-
+/* ================= 4. LAYOUT PRINCIPAL ================= */
 .site-main {
-  padding: 2.5rem 0 3.5rem;
+  padding: 2.5rem 1.5rem;
   flex: 1;
-}
-
-.site-footer {
-  background: var(--bg-darker);
-  color: #F4EAD6;
-  padding: 2rem 0;
-  text-align: center;
-}
-
-.message-stack {
-  padding: 1rem 0 0;
-}
-
-.hero-banner {
-  background: linear-gradient(120deg, var(--accent-sky1), var(--brand));
-  color: #fff;
-  border-radius: 1.5rem;
-  padding: 3rem;
-  box-shadow: var(--card-shadow);
-}
-
-.hero-banner h1 {
-  font-size: clamp(2.2rem, 4vw, 3.2rem);
-  margin-bottom: 1rem;
-}
-
-.hero-banner p {
-  font-size: 1.1rem;
-  max-width: 640px;
-}
-
-.hero-banner .cta-group {
-  margin-top: 2rem;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-}
-
-.section-card,
-.form-card,
-.profile-summary {
-  background: #fff;
-  border-radius: 1rem;
-  padding: 1.75rem;
-  box-shadow: var(--card-shadow);
-}
-
-.section-card + .section-card {
-  margin-top: 1.5rem;
-}
-
-.stat-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-  gap: 1rem;
-}
-
-.stat-card {
-  background: #FFF3E0;
-  border-radius: 0.8rem;
-  padding: 1rem;
-  text-align: center;
-}
-
-.stat-card strong {
-  display: block;
-  font-size: 1.8rem;
-  color: var(--brand);
-}
-
-.card-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 1.5rem;
-}
-
-.donation-card {
-  background: #fff;
-  border-radius: 1rem;
-  padding: 1.5rem;
-  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-  border: 1px solid rgba(93, 95, 117, 0.12);
-}
-
-.donation-card__media {
-  border-radius: 0.8rem;
-  overflow: hidden;
-  height: 180px;
-}
-
-.donation-card__media img {
   width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-
-.donation-hero-image {
-  border-radius: 1rem;
-  overflow: hidden;
-  max-height: 360px;
-}
-
-.donation-hero-image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-
-.donation-card h3 {
-  margin: 0;
-}
-
-.pill {
-  display: inline-flex;
-  align-items: center;
-  padding: 0.2rem 0.7rem;
-  border-radius: 999px;
-  background: rgba(93, 95, 117, 0.12);
-  font-size: 0.85rem;
-  color: var(--text-muted);
-}
-
-.filter-bar {
-  background: #fff;
-  border-radius: 1rem;
-  padding: 1rem 1.5rem;
-  box-shadow: var(--card-shadow);
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-  align-items: flex-end;
-  margin-bottom: 1.5rem;
-}
-
-.filter-bar .form-label {
-  font-weight: 600;
-  color: var(--text-muted);
-}
-
-.form-card {
-  max-width: 720px;
+  max-width: 1100px;
   margin: 0 auto;
 }
 
-.profile-summary dl {
+/* ================= 5. CARDS E HERO ================= */
+.section-card, .form-card, .profile-summary, .filter-bar, .chat-box {
+  background: #fff;
+  border-radius: var(--radius-card);
+  padding: 2rem;
+  box-shadow: var(--card-shadow);
+  border: 1px solid rgba(255,255,255,0.6);
+  margin-bottom: 2rem;
+}
+.section-card + .section-card { margin-top: 2rem; }
+.section-card h3 { color: var(--burnt); margin-top: 0; }
+
+.hero-banner {
+  background: linear-gradient(135deg, var(--burnt), var(--brand)) !important;
+  color: #fff;
+  border-radius: var(--radius-card);
+  padding: 3.5rem;
+  box-shadow: var(--card-shadow);
+  margin-bottom: 2.5rem;
+}
+.hero-banner h1 { font-size: clamp(2rem, 4vw, 3rem); margin-bottom: 1rem; font-weight: 800; }
+.hero-banner p { font-size: 1.15rem; max-width: 640px; }
+.hero-banner .cta-group { margin-top: 2rem; display: flex; gap: 1rem; flex-wrap: wrap; }
+
+/* ================= 6. STATS E GRID ================= */
+.stat-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 1rem;
+}
+.stat-card {
+  background: #FFFBF0; border-radius: 12px; padding: 1.2rem; text-align: center;
+  border: 1px solid rgba(242, 183, 5, 0.3);
+}
+.stat-card strong { display: block; font-size: 2rem; color: var(--burnt); }
+
+.card-grid {
   display: grid;
-  grid-template-columns: minmax(120px, 200px) 1fr;
-  column-gap: 1.25rem;
-  row-gap: 0.6rem;
-  margin: 0;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
 }
+.card-grid .section-card { margin-top: 0; height: 100%; }
 
-.profile-summary__identity {
+/* ================= 7. DOAÇÕES (CARD E IMAGEM) ================= */
+.donation-card {
+  background: #fff;
+  border-radius: var(--radius-card);
+  box-shadow: var(--card-shadow);
   display: flex;
-  align-items: center;
-  gap: 1rem;
-}
-
-.profile-photo {
-  width: 72px;
-  height: 72px;
-  border-radius: 50%;
+  flex-direction: column; /* Mobile */
+  margin-bottom: 2rem;
   overflow: hidden;
-  background: rgba(216,138,26,0.12);
-  color: var(--brand-dark);
-  display: inline-flex;
-  align-items: center;
+  border: 1px solid rgba(255,255,255,0.5);
+  transition: transform 0.3s ease;
+  padding: 0; /* Padding zero para a imagem colar */
+}
+.donation-card:hover { transform: translateY(-3px); box-shadow: var(--card-shadow-hover); }
+
+.donation-card__media {
+  height: 200px; width: 100%;
+  overflow: hidden;
+  border-radius: 0;
+}
+.donation-card__media img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+.donation-card h3 { margin: 0 0 0.5rem 0; font-size: 1.4rem; color: var(--text-primary); }
+
+/* Wrapper de texto dentro do card de doação */
+.donation-card > *:not(.donation-card__media) {
+  padding: 1.5rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
   justify-content: center;
-  font-weight: 600;
-  font-size: 1.5rem;
 }
 
-.profile-photo img {
+/* Desktop: Lado a Lado */
+@media (min-width: 768px) {
+  .donation-card { flex-direction: row; min-height: 240px; }
+  .donation-card__media { width: 320px; height: auto; }
+}
+
+/* Imagem Grande de Detalhes */
+.donation-hero-image {
   width: 100%;
-  height: 100%;
-  object-fit: cover;
+  height: auto; /* Deixa a altura automática para não sobrar espaço vazio */
+  background: transparent; /* Fundo transparente */
+  margin-bottom: 2rem;
+  
+  /* Centraliza a imagem na tela */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+  /* Removemos bordas e sombras do container, vamos por na foto */
+  border: none;
+  box-shadow: none;
+  border-radius: 0;
+}
+
+.donation-hero-image img {
+  /* A imagem mantém o tamanho original, mas respeita os limites */
+  width: auto;
+  height: auto;
+  
+  /* Travas para não ficar gigante */
+  max-width: 100%;
+  max-height: 500px; /* Altura máxima controlada */
+  
+  /* Garante que a foto aparece inteira */
+  object-fit: contain;
+  
+  /* A MOLDURA VAI AQUI AGORA */
+  border-radius: 16px; /* Bordas arredondadas na foto */
+  box-shadow: 0 10px 30px rgba(140, 94, 53, 0.15); /* Sombra na foto */
   display: block;
 }
 
-.profile-summary dt {
-  font-weight: 600;
-  color: var(--text-muted);
+/* ================= 8. FILTROS E PILLS ================= */
+.filter-bar { display: flex; flex-wrap: wrap; gap: 1rem; align-items: flex-end; margin-bottom: 2rem; }
+.filter-bar .form-label { font-weight: 700; font-size: 0.85rem; color: var(--burnt); display: block; margin-bottom: 0.3rem; }
+
+input, select, textarea {
+  width: 100%; padding: 0.8rem 1rem; border-radius: 10px;
+  border: 1px solid #E0E0E0; background: #FAFAFA;
+  font-family: inherit; color: var(--text-primary);
+}
+input:focus, select:focus { outline: none; border-color: var(--brand); background: #fff; box-shadow: 0 0 0 3px rgba(242, 183, 5, 0.2); }
+
+.pill {
+  display: inline-flex; align-items: center; padding: 0.3rem 0.8rem;
+  border-radius: 999px; background: #F5F5F5; font-size: 0.85rem; font-weight: 600; color: var(--text-muted);
 }
 
-.profile-summary dd {
-  margin: 0;
+/* ================= 9. PERFIL ================= */
+.profile-summary dl {
+  display: grid; grid-template-columns: 180px 1fr; column-gap: 1.5rem; row-gap: 1rem;
+  margin: 2rem 0 0 0; border-top: 1px solid #EEE; padding-top: 1.5rem;
 }
-
-.chat-wrapper {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 1rem;
+.profile-summary__identity { display: flex; align-items: center; gap: 1.5rem; }
+.profile-photo {
+  width: 80px; height: 80px; border-radius: 50%; overflow: hidden;
+  background: #FFF3E0; color: var(--burnt); display: inline-flex;
+  align-items: center; justify-content: center; font-weight: 700; font-size: 1.8rem;
+  border: 3px solid #fff; box-shadow: 0 4px 10px rgba(0,0,0,0.1);
 }
+.profile-photo img { width: 100%; height: 100%; object-fit: cover; }
+.profile-summary dt { font-weight: 700; color: var(--text-muted); align-self: center; }
+.profile-summary dd { margin: 0; }
 
-.chat-box {
-  background: #fff;
-  border-radius: 1rem;
-  padding: 1rem;
-  box-shadow: var(--card-shadow);
-  min-height: 320px;
-  max-height: 420px;
-  overflow-y: auto;
+/* ================= 10. CHAT E FOOTER ================= */
+.chat-wrapper { display: grid; grid-template-columns: 1fr; gap: 1rem; }
+.chat-box { min-height: 320px; max-height: 420px; overflow-y: auto; border: 1px solid #EEE; }
+.chat-message { margin-bottom: 1rem; padding: 0.8rem; background: #FAFAFA; border-radius: 8px; }
+.chat-message strong { display: block; margin-bottom: 0.3rem; color: var(--burnt); }
+.chat-form textarea { resize: none; }
+
+.site-footer {
+  background: var(--bg-darker); color: #E0D0C0; padding: 3rem 0;
+  text-align: center; margin-top: auto; border-top: 4px solid var(--brand-dark);
 }
+.message-stack { padding: 1rem 0 0; }
 
-.chat-message {
-  margin-bottom: 0.75rem;
-}
-
-.chat-message strong {
-  display: inline-block;
-  margin-bottom: 0.2rem;
-}
-
-.chat-form textarea {
-  resize: none;
-}
-
+/* Mobile */
 @media (max-width: 992px) {
-  .nav-container {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .nav-actions {
-    width: 100%;
-    justify-content: flex-start;
-  }
+  .nav-container { flex-direction: column; gap: 1rem; }
+  .profile-summary dl { grid-template-columns: 1fr; gap: 0.5rem; }
 }

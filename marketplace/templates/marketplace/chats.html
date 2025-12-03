@@ -10,13 +10,13 @@
           <h1 class="h4 mb-1">Minhas conversas</h1>
           <p class="text-muted mb-0">Acompanhe o histórico com doadores e interessados. Novas mensagens aparecem automaticamente no chat do anúncio.</p>
         </div>
-        <a class="btn btn-outline-secondary" href="{% url 'marketplace:index' %}">Ver doações</a>
+  <a class="btn btn-outline-secondary" href="{% url 'doacoes:index' %}">Ver doações</a>
       </div>
 
       {% if conversations %}
         <div class="list-group">
           {% for c in conversations %}
-            <a class="list-group-item list-group-item-action" href="{% url 'marketplace:chat' c.donation.pk %}?with={{ c.other.pk }}">
+            <a class="list-group-item list-group-item-action" href="{% url 'doacoes:chat' c.donation.pk %}?with={{ c.other.pk }}">
               <div class="d-flex w-100 justify-content-between">
                 <div>
                   <h2 class="h6 mb-1">{{ c.donation.title }}</h2>

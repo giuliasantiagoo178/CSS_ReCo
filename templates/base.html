@@ -13,13 +13,12 @@
   <header class="site-header">
     <div class="container nav-container">
       <a class="brand" href="{% url 'home' %}">
-        <img src="{% static 'logo_ReCo.png' %}" alt="Logotipo ReCo" height="32" loading="lazy">
-        <span>ReCo</span>
+        <img src="{% static 'Design sem nome.png' %}" alt="Logotipo ReCo" height="120" loading="lazy">
       </a>
 
       <div class="nav-actions">
         {% if request.user.is_authenticated %}
-          <a class="btn btn-primary btn-sm" href="{% url 'marketplace:create' %}">Anunciar item</a>
+          <a class="btn btn-primary btn-sm" href="{% url 'doacoes:create' %}">Anunciar item</a>
           <span class="welcome">Olá, {{ request.user.first_name|default:request.user.username }}</span>
 
           <div class="nav-dropdown">
@@ -29,9 +28,9 @@
             </button>
             <div class="nav-dropdown-menu" role="menu">
               <a role="menuitem" href="{% url 'home' %}">Início</a>
-              <a role="menuitem" href="{% url 'marketplace:index' %}">Doações</a>
+              <a role="menuitem" href="{% url 'doacoes:index' %}">Doações</a>
               <a role="menuitem" href="{% url 'perfil:index' %}">Perfil</a>
-              <a role="menuitem" href="{% url 'marketplace:chats' %}">Chats</a>
+              <a role="menuitem" href="{% url 'doacoes:chats' %}">Chats</a>
               <a role="menuitem" href="{% url 'usuario:logout' %}">Sair</a>
             </div>
           </div>

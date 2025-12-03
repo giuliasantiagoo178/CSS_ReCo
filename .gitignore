@@ -1,26 +1,25 @@
-<<<<<<< HEAD
-# Python / Django
-__pycache__/
-*.py[cod]
-*.sqlite3
-db.sqlite3
-
-# Virtualenv
+# Python
 .venv/
 venv/
-env/
+__pycache__/
+*.py[cod]
+*.egg-info/
+
+# Django
+db.sqlite3
+media/
+staticfiles/
+
+# Editor
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+
+# Logs
+*.log
 
 # Node
 node_modules/
-package-lock.json
-
-# IDE/editor
-.vscode/
-.idea/
-=======
-__pycache__/
-*.py[cod]
-.venv/
-db.sqlite3
-.vscode/
->>>>>>> 9354b77d (chore: upload project ReCo)
+dist/

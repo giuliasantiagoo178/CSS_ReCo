@@ -68,7 +68,7 @@ def create(request):
             donation.donor = request.user
             donation.save()
             messages.success(request, 'Anúncio publicado com sucesso!')
-            return redirect('marketplace:detail', donation.pk)
+            return redirect('doacoes:detail', donation.pk)
     else:
         form = DonationForm()
 
@@ -186,8 +186,8 @@ def chat(request, pk):
     else:
         active_participant = donation.donor
 
-    messages_url = reverse('marketplace:messages_json', kwargs={'pk': donation.pk})
-    post_url = reverse('marketplace:post_message', kwargs={'pk': donation.pk})
+    messages_url = reverse('doacoes:messages_json', kwargs={'pk': donation.pk})
+    post_url = reverse('doacoes:post_message', kwargs={'pk': donation.pk})
 
     if active_participant:
         messages_url = f"{messages_url}?participant={active_participant.pk}"
