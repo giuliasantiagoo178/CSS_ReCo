@@ -35,8 +35,8 @@
             </div>
           </div>
         {% else %}
-          <a class="btn btn-outline-light btn-sm" href="{% url 'usuario:login' %}">Entrar</a>
-          <a class="btn btn-light btn-sm" href="{% url 'usuario:register' %}">Criar conta</a>
+          <a class="btn btn-outline-primary btn-sm" href="{% url 'usuario:login' %}">Entrar</a>
+          <a class="btn btn-primary btn-sm" href="{% url 'usuario:register' %}">Criar conta</a>
         {% endif %}
       </div>
     </div>
@@ -85,6 +85,72 @@
         if (!dropdown.contains(event.target)) {
           closeMenu();
         }
+      });
+    })();
+  </script>
+  <script>
+    // Contagem suave e contínua usando requestAnimationFrame
+    (function(){
+      function formatNumber(n){ return n.toLocaleString('pt-BR'); }
+      function easeInOutQuad(t){ return t<0.5 ? 2*t*t : -1 + (4-2*t)*t; }
+
+      function animateValue(el, start, end, duration){
+        const startTime = performance.now();
+        function frame(now){
+          const elapsed = now - startTime;
+          const progress = Math.min(elapsed / duration, 1);
+          const eased = easeInOutQuad(progress);
+          const value = Math.round(start + (end - start) * eased);
+          el.textContent = formatNumber(value);
+          if (progress < 1) requestAnimationFrame(frame);
+          else {
+            el.textContent = formatNumber(end);
+          }
+        }
+        requestAnimationFrame(frame);
+      }
+
+      // inicia incremento contínuo a cada segundo; usa animateValue para suavizar transições
+      function startContinuousIncrement(el, current, step){
+        // começa com um pequeno jitter para que não fiquem sincronizados
+        const jitter = Math.floor(Math.random() * 900); // 0-900ms
+        const handle = setTimeout(function(){
+          const timer = setInterval(function(){
+            const from = parseInt(String(el.textContent).replace(/\D/g, '') || 0, 10);
+            const to = from + step;
+            // anima a transição mais lenta e aplica um pulso visual
+            animateValue(el, from, to, 1000);
+            el.classList.add('count-pulse');
+            setTimeout(function(){ el.classList.remove('count-pulse'); }, 600);
+          }, 2000);
+        }, jitter);
+        return handle;
+      }
+
+      document.addEventListener('DOMContentLoaded', function(){
+        const counters = document.querySelectorAll('.stat-card strong');
+        if (!counters) return;
+        counters.forEach(function(el){
+          const raw = el.getAttribute('data-target');
+          // aplica classe visual de subida
+          el.classList.add('count-animate');
+          if (raw) {
+            const target = parseInt(raw.replace(/\D/g, ''), 10);
+            if (!isNaN(target) && target > 0) {
+              // inicia em zero e anima lentamente (6s)
+              el.textContent = '0';
+              animateValue(el, 0, target, 6000);
+              // após a animação inicial, começa incremento contínuo (uma vez a cada 2s)
+              // calculamos um passo razoável: 1 por segundo para pequenos números,
+              // ou ~target/1000 para números maiores. Pode ser sobrescrito por data-step.
+              const stepDefault = target < 1000 ? 1 : Math.ceil(target / 1000);
+              const stepAttr = parseInt(el.getAttribute('data-step') || '', 10);
+              const step = !isNaN(stepAttr) && stepAttr > 0 ? stepAttr : stepDefault;
+              // aguarda o tempo da animação inicial antes de iniciar os increments
+              setTimeout(function(){ startContinuousIncrement(el, target, step); }, 6200 + Math.floor(Math.random()*600));
+            }
+          }
+        });
       });
     })();
   </script>
